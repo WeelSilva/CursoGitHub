@@ -3,6 +3,8 @@ let jogador1Imagem;
 let jogador2Imagem;
 let fundoImagem;
 let quicaSom;
+let golSom;
+
 class Raquete {
     constructor(x) {
         this.x = x;
@@ -57,10 +59,11 @@ class Bola {
     update() {
         this.x += this.vx;
         this.y += this.vy;
-        //rotaciona de acordo com a velocidade x e y
+        
         this.angulo += Math.sqrt(this.vx * this.vx + this.vy * this.vy) / 30;
         
         if (this.x < this.r || this.x > width - this.r) {
+            golSom.play();
             this.reset();
         }
         if (this.y < this.r || this.y > height - this.r) {
@@ -109,6 +112,7 @@ function preload() {
     jogador2Imagem = loadImage('barra02.png');
     fundoImagem = loadImage('fundo1.png');
     quicaSom = loadSound('446100__justinvoke__bounce.wav')
+    golSom = loadSound('274178__littlerobotsoundfactory__jingle_win_synth_02.wav')
     }
 
 function setup() {
