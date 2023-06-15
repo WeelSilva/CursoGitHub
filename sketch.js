@@ -5,6 +5,8 @@ let fundoImagem;
 let quicaSom;
 let golSom;
 
+let jogador1Pontos = 0;
+let jogador2Pontos = 0;
 class Raquete {
     constructor(x) {
         this.x = x;
@@ -62,8 +64,14 @@ class Bola {
         
         this.angulo += Math.sqrt(this.vx * this.vx + this.vy * this.vy) / 30;
         
-        if (this.x < this.r || this.x > width - this.r) {
+        if (this.x < this.r || this.x > width - this.r) { 
+            if (this.x < this.r) {
+                jogador2Pontos++;
+            } else {
+                jogador1Pontos++;
+            }
             golSom.play();
+            falaPontos();
             this.reset();
         }
         if (this.y < this.r || this.y > height - this.r) {
@@ -105,6 +113,16 @@ function colideRetanguloCirculo(cx, cy, raio, x, y, w, h) {
 let bola;
 let jogador1;
 let jogador2;
+
+function falaPontos() {
+    if ('speechSynthesis' in window) {
+        const pontuacao = "Brasil" + jogador1Pontos + ' Italia ' + jogador2Pontos;
+        const msg = new SpeechSynthesisUtterance(pontuacao);
+        msg.lang = 'pt-BR';
+        window.speechSynthesis.speak(msg);
+    }
+}
+
 
 function preload() {
     bolaImagem = loadImage('bola.png');
