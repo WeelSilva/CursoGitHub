@@ -12,7 +12,7 @@ class Raquete {
         this.x = x;
         this.y = height / 2;
         this.w = 10;
-        this.h = 60;
+        this.h = 80;
     }
     update() {
         // se a raquete é o jogador 1
@@ -46,15 +46,16 @@ class Raquete {
 }
 class Bola {
     constructor() {
-        this.r = 25;
+        this.r = 20;
         this.reset();
     }
 
     reset() {
         this.x = width / 2;
         this.y = height / 2;
-        this.vx = Math.random() * 10 - 5;
-        this.vy = Math.random() * 10 - 5;
+        const velocidadeMaxima = 8;
+        this.vx = Math.random() * velocidadeMaxima * 2 - velocidadeMaxima;
+        this.vy = Math.random() * velocidadeMaxima * 2 - velocidadeMaxima;
         this.angulo = 0;
     }
     
